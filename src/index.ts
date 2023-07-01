@@ -5,13 +5,14 @@ import cors from 'cors';
 import nocache from 'nocache';
 // import swaggerUI from 'swagger-ui-express';
 import dotenv from 'dotenv';
+import connectDB from './config/database';
 // import swaggerSpec from './config/swaggerDef';
 // import router from './routes';
 
 const app: Application = express();
 
 dotenv.config();
-
+connectDB();
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(helmet());
