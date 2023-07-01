@@ -1,0 +1,41 @@
+{
+  "name": "the-drone-project",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "npm run build && node ./dist/bin/www.js",
+    "dev": "nodemon ./src/bin/www.ts",
+    "build": "npx tsc",
+    "lint": "npx eslint . --ext .ts",
+    "lint-fix": "npx eslint . --ext .ts --fix",
+    "prettier": "npx prettier --config .prettierrc src/**/*.ts --write",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/cors": "^2.8.13",
+    "@types/express": "^4.17.17",
+    "@typescript-eslint/eslint-plugin": "^5.60.1",
+    "@typescript-eslint/parser": "^5.60.1",
+    "eslint": "^8.44.0",
+    "eslint-config-prettier": "^8.8.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "nodemon": "^2.0.22",
+    "prettier": "^2.8.8",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.1.6"
+  },
+  "dependencies": {
+    "concurrently": "^8.2.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "helmet": "^7.0.0",
+    "log4js": "^6.9.1",
+    "nocache": "^4.0.0",
+    "validate.js": "^0.13.1"
+  }
+}
