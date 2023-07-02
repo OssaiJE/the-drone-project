@@ -1,5 +1,5 @@
-/* eslint-disable no-console */
 import mongoose, { ConnectOptions } from 'mongoose';
+import logger from '../utilities/logger';
 
 /**
  * ConnectDB() is an async function that uses mongoose.connect() to connect to the MongoDB database
@@ -13,11 +13,9 @@ const connectDB = async () => {
         useNewUrlParser: true
       } as ConnectOptions
     );
-
-    console.log(`MongoDB Connected: ${conn.connection.host}`);
+    logger.info('MongoDB Connected: ', conn.connection.host);
   } catch (error) {
-    console.error(`Error: ${(error as Error).message}`);
-    console.log(process.env.MONGO_URI as string);
+    logger.error('Error: ', (error as Error).message);
     process.exit(1);
   }
 };

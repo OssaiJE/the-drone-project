@@ -6,5 +6,5 @@ dotenv.config();
 const port = process.env.PORT;
 
 app.listen(port, () => {
-  logger.info(`The drone project now listening on PORT ${port}`);
+  logger.info('The drone project now listening on PORT ', port);
 });
