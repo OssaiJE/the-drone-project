@@ -8,6 +8,7 @@ import dotenv from 'dotenv';
 import connectDB from './config/database';
 // import swaggerSpec from './config/swaggerDef';
 import dispatchRoute from './routes/dispatchRoute';
+import './batteryChecker';
 
 const app: Application = express();
 

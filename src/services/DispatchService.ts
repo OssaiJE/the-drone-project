@@ -4,6 +4,8 @@ import Medication from '../database/models/MedicationModel';
 import IDrone from 'src/interface/IDrone';
 import IMedication from 'src/interface/IMedication';
 
+/* The `class DispatchService` is a class that provides various methods for managing drones
+and medications in a dispatch system. */
 class DispatchService {
   /**
    * The function `registerDrone`
@@ -98,7 +100,7 @@ class DispatchService {
    * @param {string} droneId -
    * @returns the drone's medication.
    */
-  async getLoadedMedication(droneId: string): Promise<IMedication> {
+  async getLoadedMedication(droneId: string): Promise<IDrone> {
     logger.info('getLoadedMedication service: ', { droneId });
     const drone = await Drone.findById(droneId).populate('medication');
     if (!drone) {
@@ -107,7 +109,7 @@ class DispatchService {
     }
     logger.info('Loaded Medication : ', { drone });
 
-    return drone.medicationId;
+    return drone;
   }
 
   /**
