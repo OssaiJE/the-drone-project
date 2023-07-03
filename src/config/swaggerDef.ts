@@ -8,7 +8,7 @@ const swaggerDefinition: SwaggerDefinition = {
     version: '1.0.0',
     description: 'This is the full documentation of the The Drone Project API Version 1.' // Short description of the app
   },
-  servers: [{ url: '/api/v2' }]
+  servers: [{ url: '/api/v1' }]
 };
 
 const dir = path.join(__dirname, '../../docs', '/');

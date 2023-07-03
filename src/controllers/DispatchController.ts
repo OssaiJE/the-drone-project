@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import DispatchService from '../services/DispatchService';
-import { failure, success } from 'src/utilities/response';
-import logger from 'src/utilities/logger';
+import { failure, success } from '../utilities/response';
+import logger from '../utilities/logger';
 
 const dispatchService = new DispatchService();
 

@@ -1,0 +1,146 @@
+openapi: 3.0.0
+info:
+  version: 1.0.0
+  title: Drone Medication Dispatch API
+  description: An API for managing drones and medications
+components:
+  schemas:
+    Drone:
+      type: object
+      properties:
+        serialNumber:
+          type: string
+          maxLength: 100
+        model:
+          type: string
+          enum: [Lightweight, Middleweight, Cruiserweight, Heavyweight]
+          example: "Can either be Lightweight/Middleweight/Cruiserweight/Heavyweight"
+        weightLimit:
+          type: number
+          maximum: 500
+        batteryCapacity:
+          type: number
+          minimum: 0
+          maximum: 100
+        state:
+          type: string
+          enum: [IDLE, LOADING, LOADED, DELIVERING, DELIVERED, RETURNING]
+          example: "Can either be IDLE/LOADING/LOADED/DELIVERING/DELIVERED/RETURNING"
+
+    Medication:
+      type: object
+      properties:
+        name:
+          type: string
+          pattern: '^[A-Za-z0-9-_]+$'
+        weight:
+          type: number
+        code:
+          type: string
+          pattern: '^[A-Z0-9_]+$'
+        image:
+          type: string
+          format: binary
+        droneId:
+          type: string
+          format: uuid
+
+paths:
+  /drones:
+    post:
+      tags:
+        - Drone
+      summary: Register a new drone
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Drone'
+      responses:
+        '201':
+          description: Drone successfully registered
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Drone'
+
+  /drones/load:
+    post:
+      tags:
+        - Drone
+      summary: Load a drone with medications
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Medication'
+      responses:
+        '200':
+          description: Drone successfully loaded with medications
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Medication'
+
+  /drones/{droneId}/medication:
+    get:
+      tags:
+        - Drone
+      summary: Get loaded medications for a drone
+      parameters:
+        - in: path
+          name: droneId
+          schema:
+            type: string
+            format: uuid
+          required: true
+          description: The ID of the drone
+      responses:
+        '200':
+          description: Loaded medications for the drone
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Medication'
+
+  /drones/available:
+    get:
+      tags:
+        - Drone
+      summary: Get available drones for loading
+      responses:
+        '200':
+          description: List of available drones
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Drone'
+
+  /drones/{droneId}/battery-level:
+    get:
+      tags:
+        - Drone
+      summary: Get battery level for a drone
+      parameters:
+        - in: path
+          name: droneId
+          schema:
+            type: string
+            format: uuid
+          required: true
+          description: The ID of the drone
+      responses:
+        '200':
+          description: Battery level of the drone
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  batteryLevel:
+                    type: number
+                    format: float
+                    minimum: 0
+                    maximum: 100

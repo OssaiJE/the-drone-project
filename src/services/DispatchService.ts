@@ -1,8 +1,8 @@
 import logger from '../utilities/logger';
 import Drone from '../database/models/DroneModel';
 import Medication from '../database/models/MedicationModel';
-import IDrone from 'src/interface/IDrone';
-import IMedication from 'src/interface/IMedication';
+import IDrone from '../interface/IDrone';
+import IMedication from '../interface/IMedication';
 
 /* The `class DispatchService` is a class that provides various methods for managing drones
 and medications in a dispatch system. */

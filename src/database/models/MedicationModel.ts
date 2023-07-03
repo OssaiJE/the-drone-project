@@ -1,5 +1,5 @@
 import { Schema, model } from 'mongoose';
-import IMedication from 'src/interface/IMedication';
+import IMedication from '../../interface/IMedication';
 
 // Medication Model
 const medicationSchema = new Schema<IMedication>({

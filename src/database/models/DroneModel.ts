@@ -1,5 +1,5 @@
 import { Schema, model } from 'mongoose';
-import IDrone from 'src/interface/IDrone';
+import IDrone from '../../interface/IDrone';
 
 // Drone Model
 const droneSchema = new Schema<IDrone>({
@@ -15,6 +15,7 @@ const droneSchema = new Schema<IDrone>({
   },
   weightLimit: {
     type: Number,
+    min: 0,
     max: 500
   },
   batteryCapacity: {
