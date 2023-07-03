@@ -1,7 +1,8 @@
 import { Schema, model } from 'mongoose';
+import IMedication from 'src/interface/IMedication';
 
 // Medication Model
-const medicationSchema = new Schema({
+const medicationSchema = new Schema<IMedication>({
   name: {
     type: String,
     match: /^[A-Za-z0-9-_]+$/
@@ -16,7 +17,7 @@ const medicationSchema = new Schema({
   image: {
     type: String
   },
-  drone: {
+  droneId: {
     type: Schema.Types.ObjectId,
     ref: 'Drone',
     required: true

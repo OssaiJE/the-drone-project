@@ -1,11 +1,13 @@
 import { Schema, model } from 'mongoose';
+import IDrone from 'src/interface/IDrone';
 
 // Drone Model
-const droneSchema = new Schema({
+const droneSchema = new Schema<IDrone>({
   serialNumber: {
     type: String,
     maxlength: 100,
-    required: true
+    required: true,
+    unique: true
   },
   model: {
     type: String,
@@ -23,6 +25,10 @@ const droneSchema = new Schema({
   state: {
     type: String,
     enum: ['IDLE', 'LOADING', 'LOADED', 'DELIVERING', 'DELIVERED', 'RETURNING']
+  },
+  medicationId: {
+    type: Schema.Types.ObjectId,
+    ref: 'Medication'
   }
 });
 

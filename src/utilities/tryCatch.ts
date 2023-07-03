@@ -8,8 +8,8 @@ export default (
   async (req: Request, res: Response, next: NextFunction) => {
     try {
       return await method(req, res, next);
-    } catch (error: any) {
-      logger.error(`${error.message}`, error);
+    } catch (error) {
+      logger.error(`${(error as Error).message}`, error);
       return failure(503, 'Some error occurred', res);
     }
   };

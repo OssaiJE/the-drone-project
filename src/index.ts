@@ -7,7 +7,7 @@ import nocache from 'nocache';
 import dotenv from 'dotenv';
 import connectDB from './config/database';
 // import swaggerSpec from './config/swaggerDef';
-// import router from './routes';
+import dispatchRoute from './routes/dispatchRoute';
 
 const app: Application = express();
 
@@ -30,7 +30,7 @@ app.set('trust proxy', true);
 app.set('view engine', 'pug');
 app.set('views', path.join(__dirname, '../public/views'));
 
-// app.use('/api/v1', router);
+app.use('/api/v1', dispatchRoute);
 
 app.use('/no-route', (req: Request, res: Response, next: NextFunction) => {
   next();
