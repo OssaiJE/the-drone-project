@@ -49,7 +49,8 @@ export const codeRule = (code: string) => ({
       minimum: 1
     },
     format: {
-      pattern: '^[A-Z0-9_]+$'
+      pattern: '^[A-Z0-9_]+$',
+      message: 'allows only upper case letters, underscore and numbers'
     }
   }
 });

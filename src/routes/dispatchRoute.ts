@@ -17,9 +17,9 @@ const router = express.Router();
 router.post('/drones', registerDroneValidation, tryCatch(registerDrone));
 router.post(
   '/drones/load',
-  loadDroneValidation,
   upload.single('image'),
   fileErrorHandler,
+  loadDroneValidation,
   tryCatch(loadDroneWithMedication)
 );
 router.get('/drones/:droneId/medication', idValidation, tryCatch(getLoadedMedication));

@@ -43,6 +43,9 @@ export const loadDroneWithMedication = async (req: Request, res: Response) => {
   if (!drone) {
     return failure(422, 'Drone does not exist.', res);
   }
+  if (drone.state !== 'IDLE') {
+    return failure(422, 'Drone is currently in operation.', res);
+  }
 
   if (drone.weightLimit < weight) {
     return failure(422, 'Drone cannot carry the weight of the medication', res);
@@ -58,6 +61,7 @@ export const loadDroneWithMedication = async (req: Request, res: Response) => {
     image,
     droneId
   );
+
   logger.info('Loaded drone object: ', loadedDrone);
 
   return success(res, 201, 'Loaded a drone with medication successfully', loadedDrone);
@@ -100,7 +104,10 @@ export const getAvailableDrones = async (req: Request, res: Response) => {
 a drone. */
 export const getDroneBatteryLevel = async (req: Request, res: Response) => {
   const { droneId } = req.params;
-
+  const drone = await dispatchService.getDrone(droneId);
+  if (!drone) {
+    return failure(400, 'Drone does not exist', res);
+  }
   const batteryLevel = await dispatchService.getDroneBatteryLevel(droneId);
   logger.info('getDroneBatteryLevel Controller', batteryLevel);
   return success(res, 200, 'Successfully retrieved drone batterry level', {

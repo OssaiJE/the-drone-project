@@ -129,7 +129,6 @@ paths:
           name: droneId
           schema:
             type: string
-            format: uuid
           required: true
           description: The ID of the drone
       responses:

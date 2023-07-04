@@ -114,7 +114,7 @@ class DispatchService {
    */
   async getLoadedMedication(droneId: string): Promise<IDrone> {
     logger.info('getLoadedMedication service: ', { droneId });
-    const drone = await Drone.findById(droneId).populate('medication');
+    const drone = await Drone.findById(droneId).populate('medicationId');
     if (!drone) {
       logger.error('Drone not found', { droneId });
       throw new Error('Drone not found');
