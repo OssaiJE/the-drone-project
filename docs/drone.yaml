@@ -144,3 +144,34 @@ paths:
                     format: float
                     minimum: 0
                     maximum: 100
+
+  /drones/{droneId}/state:
+    patch:
+      tags:
+        - Drone
+      summary: update drone state
+      parameters:
+        - in: path
+          name: droneId
+          schema:
+            type: string
+          required: true
+          description: The ID of the drone
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                state:
+                  type: string
+                  enum: [IDLE, LOADING, LOADED, DELIVERING, DELIVERED, RETURNING]
+                  example: 'Can either be IDLE/LOADING/LOADED/DELIVERING/DELIVERED/RETURNING'
+      responses:
+        '200':
+          description: Drone object with updated state
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Drone'

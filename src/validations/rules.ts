@@ -20,17 +20,6 @@ export const nameRule = (name: string) => ({
   }
 });
 
-// export const weightRule = (weightLimit: number) => ({
-//   [weightLimit]: {
-//     presence: true,
-//     numericality: {
-//       greaterThanOrEqualTo: 1,
-//       lessThanOrEqualTo: 500,
-//       onlyInteger: true
-//     }
-//   }
-// });
-
 export const weightRule = {
   weightLimit: {
     presence: true,
@@ -70,6 +59,16 @@ export const modelRule = (model: string) => ({
     presence: true,
     format: {
       pattern: '^(Lightweight|Middleweight|Cruiserweight|Heavyweight)$',
+      flag: 'i'
+    }
+  }
+});
+
+export const stateRule = (state: string) => ({
+  [state]: {
+    presence: true,
+    format: {
+      pattern: '^(IDLE|LOADING|LOADED|DELIVERING|DELIVERED|RETURNING)$',
       flag: 'i'
     }
   }

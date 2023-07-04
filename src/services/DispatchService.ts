@@ -147,6 +147,12 @@ class DispatchService {
 
     return drone.batteryCapacity;
   }
+
+  async updateDroneState(droneId: string, state: string) {
+    const droneState = await Drone.findByIdAndUpdate(droneId, { state });
+    logger.info('updateDroneState service: ', droneState);
+    return droneState;
+  }
 }
 
 export default DispatchService;

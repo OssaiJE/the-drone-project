@@ -114,3 +114,17 @@ export const getDroneBatteryLevel = async (req: Request, res: Response) => {
     batteryLevel
   });
 };
+
+export const updateDroneState = async (req: Request, res: Response) => {
+  const { droneId } = req.params;
+  const { state } = req.body;
+  const drone = await dispatchService.getDrone(droneId);
+  if (!drone) {
+    return failure(400, 'Drone does not exist', res);
+  }
+  const droneState = await dispatchService.updateDroneState(droneId, state);
+  logger.info('getDroneBatteryLevel Controller', droneState);
+  return success(res, 200, 'Successfully updated drone state', {
+    droneState
+  });
+};

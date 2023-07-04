@@ -2,9 +2,9 @@
   "name": "the-drone-project",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "www.js",
   "scripts": {
-    "start": "npm run build && node ./dist/bin/www.js",
+    "start": "npm run build && set NODE_ENV=production &&  node ./dist/bin/www.js",
     "dev": "nodemon ./src/bin/www.ts",
     "build": "npx tsc",
     "lint": "npx eslint . --ext .ts",
