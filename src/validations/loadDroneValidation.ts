@@ -2,7 +2,6 @@ import { Request, Response, NextFunction } from 'express';
 import validate from 'validate.js';
 import { idRule, codeRule, nameRule, weightRule } from './rules';
 import { failure } from '../utilities/response';
-import logger from '../utilities/logger';
 
 export default (req: Request, res: Response, next: NextFunction) => {
   const { body } = req;

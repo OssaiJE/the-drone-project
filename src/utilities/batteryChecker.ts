@@ -47,7 +47,7 @@ async function checkBatteryLevelsAndCreateLogs() {
 
 // Schedule the task to run every half hour
 export const startCronJob = () => {
-  cron.schedule('0 *,30 * * * *', () => {
+  cron.schedule('0 */30 * * * *', () => {
     checkBatteryLevelsAndCreateLogs();
   });
 };
