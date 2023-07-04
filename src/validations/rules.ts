@@ -20,8 +20,19 @@ export const nameRule = (name: string) => ({
   }
 });
 
-export const weightRule = (weightLimit: number) => ({
-  [weightLimit]: {
+// export const weightRule = (weightLimit: number) => ({
+//   [weightLimit]: {
+//     presence: true,
+//     numericality: {
+//       greaterThanOrEqualTo: 1,
+//       lessThanOrEqualTo: 500,
+//       onlyInteger: true
+//     }
+//   }
+// });
+
+export const weightRule = {
+  weightLimit: {
     presence: true,
     numericality: {
       greaterThanOrEqualTo: 1,
@@ -29,7 +40,7 @@ export const weightRule = (weightLimit: number) => ({
       onlyInteger: true
     }
   }
-});
+};
 
 export const codeRule = (code: string) => ({
   [code]: {
@@ -49,9 +60,6 @@ export const serialNumberRule = (serialNumber: string) => ({
     length: {
       minimum: 1,
       maximum: 100
-    },
-    format: {
-      pattern: '^[^s]*$'
     }
   }
 });

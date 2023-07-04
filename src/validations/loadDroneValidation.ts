@@ -12,7 +12,7 @@ export default (req: Request, res: Response, next: NextFunction) => {
     ...idRule('droneId'),
     ...nameRule('name'),
     ...codeRule('code'),
-    ...weightRule(body.weightLimit)
+    ...weightRule
   };
 
   const validationError = validate(body, constraint);

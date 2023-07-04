@@ -14,9 +14,10 @@ components:
         model:
           type: string
           enum: [Lightweight, Middleweight, Cruiserweight, Heavyweight]
-          example: "Can either be Lightweight/Middleweight/Cruiserweight/Heavyweight"
+          example: 'Can either be Lightweight/Middleweight/Cruiserweight/Heavyweight'
         weightLimit:
           type: number
+          minimum: 0
           maximum: 500
         batteryCapacity:
           type: number
@@ -25,7 +26,7 @@ components:
         state:
           type: string
           enum: [IDLE, LOADING, LOADED, DELIVERING, DELIVERED, RETURNING]
-          example: "Can either be IDLE/LOADING/LOADED/DELIVERING/DELIVERED/RETURNING"
+          example: 'Can either be IDLE/LOADING/LOADED/DELIVERING/DELIVERED/RETURNING'
 
     Medication:
       type: object
@@ -43,7 +44,7 @@ components:
           format: binary
         droneId:
           type: string
-          format: uuid
+          format: '64a36bcf5ceb3c79eb1ed9c3'
 
 paths:
   /drones:
@@ -94,7 +95,7 @@ paths:
           name: droneId
           schema:
             type: string
-            format: uuid
+            format: '64a36bcf5ceb3c79eb1ed9c3'
           required: true
           description: The ID of the drone
       responses:

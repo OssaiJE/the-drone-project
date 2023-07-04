@@ -1,19 +1,11 @@
 import { config } from 'dotenv';
 import cron from 'node-cron';
-import * as log4js from 'log4js';
 import Drone from '../database/models/DroneModel';
+import logger from './logger';
 
 config();
 
-const { logBatteryLevel } = process.env;
-
-// Configure logger
-log4js.configure({
-  appenders: { BatteryLevel: { type: 'file', filename: logBatteryLevel } },
-  categories: { default: { appenders: ['BatteryLevel'], level: 'info' } }
-});
-
-const logger = log4js.getLogger('BatteryLevel');
+// const { logBatteryLevel } = process.env;
 
 // Function to check drone battery levels and create history/audit event logs
 async function checkBatteryLevelsAndCreateLogs() {
@@ -38,7 +30,8 @@ async function checkBatteryLevelsAndCreateLogs() {
           'BATTERY_CRITICAL',
           batteryLevel
         );
-      } else if (batteryLevel <= 25) {
+      }
+      if (batteryLevel <= 25) {
         logger.warn(
           'DRONE_SERIALNUMBER: ',
           drone.serialNumber,
@@ -53,6 +46,8 @@ async function checkBatteryLevelsAndCreateLogs() {
 }
 
 // Schedule the task to run every half hour
-cron.schedule('30 30 * * * *', () => {
-  checkBatteryLevelsAndCreateLogs();
-});
+export const startCronJob = () => {
+  cron.schedule('0 *,30 * * * *', () => {
+    checkBatteryLevelsAndCreateLogs();
+  });
+};

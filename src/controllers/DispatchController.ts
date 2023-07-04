@@ -14,6 +14,10 @@ const dispatchService = new DispatchService();
 export const registerDrone = async (req: Request, res: Response) => {
   logger.info('RegisterDrone controller', { body: req.body });
   const { serialNumber, model, weightLimit } = req.body;
+  const droneExist = await dispatchService.getDroneBySerialNumber(serialNumber);
+  if (droneExist) {
+    return failure(400, 'Drone has already been registered', res);
+  }
   const drone = await dispatchService.registerDrone(serialNumber, model, weightLimit);
 
   return success(res, 201, 'Registered a drone Successfully', drone);

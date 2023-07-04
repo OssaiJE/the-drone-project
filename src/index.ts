@@ -8,7 +8,7 @@ import swaggerUI from 'swagger-ui-express';
 import swaggerSpec from './config/swaggerDef';
 import connectDB from './config/database';
 import dispatchRoute from './routes/dispatchRoute';
-// import './batteryChecker';
+// import { startCronJob } from './utilities/batteryChecker';
 
 const app: Application = express();
 

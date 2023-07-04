@@ -50,6 +50,18 @@ class DispatchService {
   }
 
   /**
+   * The function `getDroneBySerialNumber` retrieves a drone object from the database.
+   * @param {string} serialNumber -
+   * @returns the drone object.
+   */
+  async getDroneBySerialNumber(serialNumber: string) {
+    const drone = await Drone.findOne({ serialNumber });
+    logger.info('getDroneBySerialNumber Service', drone);
+
+    return drone;
+  }
+
+  /**
    * The function `getMedication`
    * @param {string} medicationId -
    * @returns The `getMedication` function is returning the `medication` object.
