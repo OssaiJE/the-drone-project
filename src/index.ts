@@ -8,12 +8,13 @@ import swaggerUI from 'swagger-ui-express';
 import swaggerSpec from './config/swaggerDef';
 import connectDB from './config/database';
 import dispatchRoute from './routes/dispatchRoute';
-// import { startCronJob } from './utilities/batteryChecker';
+import { startCronJob } from './utilities/batteryChecker';
 
 const app: Application = express();
 
 dotenv.config();
 connectDB();
+startCronJob();
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(helmet());

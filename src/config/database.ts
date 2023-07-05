@@ -1,5 +1,5 @@
 import mongoose, { ConnectOptions } from 'mongoose';
-import logger from '../utilities/logger';
+import { logger } from '../utilities/logger';
 
 /**
  * ConnectDB() is an async function that uses mongoose.connect() to connect to the MongoDB database

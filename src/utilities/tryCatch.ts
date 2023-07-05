@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 import { failure } from './response';
-import logger from './logger';
+import { logger } from './logger';
 
 export default (
     method: (req: Request, res: Response, next?: NextFunction) => Promise<unknown>

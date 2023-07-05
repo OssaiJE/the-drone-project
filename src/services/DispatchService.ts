@@ -1,4 +1,4 @@
-import logger from '../utilities/logger';
+import { logger } from '../utilities/logger';
 import Drone from '../database/models/DroneModel';
 import Medication from '../database/models/MedicationModel';
 import IDrone from '../interface/IDrone';

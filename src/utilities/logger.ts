@@ -1,11 +1,12 @@
-import log4js, { Configuration } from 'log4js';
+import log4js, { Configuration, Logger } from 'log4js';
 import { config } from 'dotenv';
 
 config();
 
-const { logpath, logpathDev, logpathTest, NODE_ENV } = process.env;
+const { logpath, logpathDev, logpathTest, logBatteryLevel, NODE_ENV } = process.env;
 
 let logPath: string | undefined;
+const logPathBattery: string | undefined = logBatteryLevel;
 
 const generateRefID = (): string => {
   return new Date().getTime().toString();
@@ -39,13 +40,25 @@ log4js.configure({
       pattern: 'yyyy-MM-dd.txt',
       layout: logFileLayout,
       alwaysIncludePattern: true,
-      maxLogSize: 1024 * 1024 * 1, // 1024 * 1024 * 1 = 1M
+      maxLogSize: 1024 * 1024 * 2, // 1024 * 1024 * 2 = 2M
+      backups: 30
+    },
+    batteryChecker: {
+      type: 'file',
+      filename: logPathBattery, // Set the desired log file path for batteryChecker
+      pattern: 'yyyy-MM-dd.txt',
+      layout: logFileLayout,
+      alwaysIncludePattern: true,
+      maxLogSize: 1024 * 1024 * 2, // 1024 * 1024 * 2 = 2M
       backups: 30
     }
   },
   categories: {
-    default: { appenders: ['out', 'alertlog'], level: 'info' }
+    default: { appenders: ['out', 'alertlog'], level: 'info' },
+    alertlog: { appenders: ['out', 'alertlog'], level: 'info' },
+    batteryChecker: { appenders: ['out', 'batteryChecker'], level: 'info' }
   }
 });
 
-export default log4js.getLogger('alertlog');
+export const logger: Logger = log4js.getLogger('alertlog');
+export const batteryCheckerLogger: Logger = log4js.getLogger('batteryChecker');
